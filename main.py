@@ -32,3 +32,11 @@ async def get_model(model_name: ModelName):
         return {"model_name":model_name, "messange": "LeCCN all the images"}
     return {"model_name": model_name, "message": "Have some residuals"}
 
+
+@app.get("/items/{item_id}")
+async def read_itme(item_id: str, q: str | None = None):
+    if q:  
+        ... 
+        return 
+    return 
+
