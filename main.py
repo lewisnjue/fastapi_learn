@@ -1,5 +1,7 @@
 from fastapi import FastAPI
 from enum import Enum 
+from pydantic import BaseModel 
+
 
 
 
@@ -12,6 +14,11 @@ class ModelName(str,Enum):
     lenet = "lenet"
 
 
+class Item(BaseModel):
+    name: str
+    description: str | None = None 
+    price: float
+    tax: float| None = None 
 
 
 @app.get("/")
@@ -33,10 +40,17 @@ async def get_model(model_name: ModelName):
     return {"model_name": model_name, "message": "Have some residuals"}
 
 
+
 @app.get("/items/{item_id}")
 async def read_itme(item_id: str, q: str | None = None):
     if q:  
         ... 
         return 
-    return 
+    return item_id 
+
+@app.post("/items/")
+async def create_item(item:Item):
+    return item 
+
+
 
